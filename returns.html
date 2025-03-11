@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAHASRA - Returns & Refunds</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Animation speeds matching index.html */
+        body {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .action-btn {
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            transition: width 0.3s ease;
+        }
+
+        .returns-content {
+            animation: fadeIn 0.6s ease-out;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .returns-section {
+            animation: slideInUp 0.6s ease-out;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .return-step {
+            transition: all 0.3s ease;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .return-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: #FF6A00;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .return-policy-list {
+            animation: scaleIn 0.4s ease-out;
+        }
+
+        .return-policy-item {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .return-policy-item::before {
+            content: '•';
+            color: #FF6A00;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .cart-count {
+            background-color: #FF6A00;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .returns-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .returns-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .returns-sidebar {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .returns-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #FF6A00;
+            padding-bottom: 10px;
+        }
+
+        .returns-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .returns-steps {
+            list-style: none;
+            padding: 0;
+            counter-reset: steps;
+        }
+
+        .returns-steps li {
+            position: relative;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding-left: 70px;
+            border: 1px solid #ddd;
+        }
+
+        .returns-steps li::before {
+            counter-increment: steps;
+            content: counter(steps);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: #FF6A00;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .returns-info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .returns-info-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .returns-info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .returns-info-list i {
+            color: #FF6A00;
+            margin-top: 4px;
+        }
+
+        .return-status-section {
+            background: #fff5ec;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .return-status-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .return-status-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .check-status-btn {
+            background: #FF6A00;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .check-status-btn:hover {
+            background: #e65c00;
+        }
+
+        .policy-box {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .policy-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .policy-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .policy-box li {
+            padding: 8px 0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .policy-box i {
+            color: #FF6A00;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .returns-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .returns-sidebar {
+                order: 2;
+            }
+
+            .return-status-form {
+                flex-direction: column;
+            }
+
+            .check-status-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="index.html" class="logo-link">
+                    <img src="logo.png" alt="SAHASRA Logo" class="logo">
+                </a>
+            </div>
+            <div class="search-section">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="What are you looking for...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="user-actions">
+                <a href="cart.html" class="action-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="shipping.html">Shipping</a>
+                <a href="returns.html">Returns</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="returns-container">
+        <h1>Returns & Refunds</h1>
+        
+        <div class="returns-grid">
+            <div class="returns-content">
+                <div class="returns-section">
+                    <h2>Return Process</h2>
+                    <div class="return-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Initiate Return</h3>
+                            <p>Log into your account and select the order containing the item(s) you wish to return.</p>
+                        </div>
+                    </div>
+
+                    <div class="return-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Print Label</h3>
+                            <p>Print the prepaid return shipping label that we'll provide.</p>
+                        </div>
+                    </div>
+
+                    <div class="return-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Package Items</h3>
+                            <p>Pack the items securely in their original packaging if possible.</p>
+                        </div>
+                    </div>
+
+                    <div class="return-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Ship Return</h3>
+                            <p>Drop off the package at any authorized shipping location.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="returns-section">
+                    <h2>Return Policy</h2>
+                    <div class="return-policy-list">
+                        <div class="return-policy-item">
+                            <p>Items must be returned within 30 days of delivery</p>
+                        </div>
+                        <div class="return-policy-item">
+                            <p>Items must be unused and in original packaging with tags attached</p>
+                        </div>
+                        <div class="return-policy-item">
+                            <p>Refunds will be processed within 5-7 business days after receiving the return</p>
+                        </div>
+                        <div class="return-policy-item">
+                            <p>Original shipping charges are non-refundable</p>
+                        </div>
+                        <div class="return-policy-item">
+                            <p>Sale items are final sale and cannot be returned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="returns-sidebar">
+                <div class="returns-section">
+                    <h2>Track Return Status</h2>
+                    <div class="return-status-section">
+                        <h3>Enter Return ID</h3>
+                        <form class="return-status-form">
+                            <input type="text" class="return-status-input" placeholder="Enter return ID">
+                            <button type="submit" class="check-status-btn">Check Status</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="returns-section">
+                    <h2>Need Help?</h2>
+                    <ul class="returns-info-list">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>Email us at returns@sahasra.com</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>Call us at +1 234 567 8900</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-comments"></i>
+                            <div>Live chat available 24/7</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>SAHASRA brings authentic local bazaar clothing to you.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="faq.html">FAQ</a>
+                <a href="shipping.html">Shipping Info</a>
+                <a href="returns.html">Returns & Refunds</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@sahasra.com</p>
+                <p>Phone: +1 234 567 8900</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 SAHASRA. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                loadCart();
+                updateCartCount();
+                console.log('Cart initialized successfully');
+            } catch (error) {
+                console.error('Error initializing cart:', error);
+            }
+            
+            // Return status form handling
+            document.querySelector('.return-status-form')?.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const returnId = document.querySelector('.return-status-input').value;
+                if (returnId) {
+                    alert('Return status checking functionality will be implemented soon.');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
